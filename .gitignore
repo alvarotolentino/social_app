@@ -1,0 +1,21 @@
+logs
+*.log
+npm-debug.log*
+
+build/Release
+
+node_modules/
+
+web_modules/
+
+rest/
+
+.npm
+
+.eslintcache
+
+# dotenv environment variables file
+.env
+.env.test
+
+config.js
