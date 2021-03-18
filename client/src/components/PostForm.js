@@ -24,6 +24,7 @@ function PostForm() {
       });
       values.body = '';
     },
+    onError(_) {},
   });
 
   function createPostCallback() {
@@ -47,7 +48,7 @@ function PostForm() {
         </Form.Field>
       </Form>
       {error && (
-        <div className='ui error message' style={{marginBottom: 20}}>
+        <div className='ui error message' style={{ marginBottom: 20 }}>
           <ul className='list'>
             <li>{error.graphQLErrors[0].message}</li>
           </ul>

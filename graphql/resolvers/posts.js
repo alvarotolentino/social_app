@@ -30,7 +30,7 @@ module.exports = {
       const user = checkAuth(context);
 
       if (body.trim() === '') {
-        throw new Error('Post body must not be empty');
+        throw new UserInputError('Post body must not be empty');
       }
 
       const newPost = new Post({
