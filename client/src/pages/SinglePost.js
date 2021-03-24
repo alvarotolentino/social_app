@@ -14,6 +14,7 @@ import moment from 'moment';
 import { AuthContext } from '../context/auth';
 import DeleteButton from '../components/DeleteButton';
 import LikeButton from '../components/LikeButton';
+import MyPopup from '../util/MyPopup';
 
 function SinglePost(props) {
   const postId = props.match.params.postId;
@@ -78,18 +79,19 @@ function SinglePost(props) {
                   user={user}
                   post={{ id, likeCount, likes }}
                 ></LikeButton>
-                <Button
-                  as='div'
-                  labelPosition='right'
-                  onClick={() => console.log('Comment on post')}
-                >
-                  <Button basic color='blue'>
-                    <Icon name='comments'></Icon>
+                <MyPopup content='Comment on post'>
+                  <Button
+                    as='div'
+                    labelPosition='right'
+                  >
+                    <Button basic color='blue'>
+                      <Icon name='comments'></Icon>
+                    </Button>
+                    <Label basic color='blue' pointing='left'>
+                      {commentCount}
+                    </Label>
                   </Button>
-                  <Label basic color='blue' pointing='left'>
-                    {commentCount}
-                  </Label>
-                </Button>
+                </MyPopup>
                 {user && user.username === username && (
                   <DeleteButton
                     postId={id}

@@ -4,18 +4,17 @@
   "description": "Fake Social App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "Alvaro Tolentino",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.21.0",
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.18",
-    "react-router-dom": "^5.2.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.3"
+    "mongoose": "^5.11.18"
   }
 }

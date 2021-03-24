@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 import { Button, Label, Icon } from 'semantic-ui-react';
+import MyPopup from '../util/MyPopup';
 
-function LikeButton({user,  post: { id, likes, likeCount } }) {
+function LikeButton({ user, post: { id, likes, likeCount } }) {
   const [liked, setLiked] = useState(false);
   useEffect(() => {
     if (user && likes.find((like) => like.username === user.username)) {
@@ -13,6 +14,8 @@ function LikeButton({user,  post: { id, likes, likeCount } }) {
 
   const [likePost] = useMutation(LIKE_POST_MUTATION, {
     variables: { postId: id },
+    onError(_) {
+    }
   });
 
   const likeButton = user ? (
@@ -32,7 +35,7 @@ function LikeButton({user,  post: { id, likes, likeCount } }) {
   );
   return (
     <Button as='div' labelPosition='right' onClick={likePost}>
-      {likeButton}
+      <MyPopup content={liked ? 'Unlike' : 'Like'}>{likeButton}</MyPopup>
       <Label basic color='teal' pointing='left'>
         {likeCount}
       </Label>

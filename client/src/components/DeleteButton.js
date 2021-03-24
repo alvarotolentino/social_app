@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { Button, Confirm, Icon } from 'semantic-ui-react';
+import MyPopup from '../util/MyPopup';
 
 function DeleteButton({ postId, commentId, callback }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -8,7 +9,7 @@ function DeleteButton({ postId, commentId, callback }) {
   const [deletePostOrMutation] = useMutation(mutation, {
     variables: {
       postId,
-      commentId
+      commentId,
     },
     update(proxy) {
       setConfirmOpen(false);
@@ -28,14 +29,16 @@ function DeleteButton({ postId, commentId, callback }) {
   });
   return (
     <>
-      <Button
-        as='div'
-        color='red'
-        floated='right'
-        onClick={() => setConfirmOpen(true)}
-      >
-        <Icon name='trash' style={{ margin: 0 }}></Icon>
-      </Button>
+      <MyPopup content={commentId ? 'Delete comment' : 'Delete post'}>
+        <Button
+          as='div'
+          color='red'
+          floated='right'
+          onClick={() => setConfirmOpen(true)}
+        >
+          <Icon name='trash' style={{ margin: 0 }}></Icon>
+        </Button>
+      </MyPopup>
       <Confirm
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}
@@ -52,18 +55,18 @@ const DELETE_POST_MUTATION = gql`
 `;
 
 const DELETE_COMMENT_MUTATION = gql`
-mutation deleteComment($postId: ID!, $commentId: ID!) {
-  deleteComment(postId: $postId, commentId: $commentId) {
-    id
-    comments{
+  mutation deleteComment($postId: ID!, $commentId: ID!) {
+    deleteComment(postId: $postId, commentId: $commentId) {
       id
-      username
-      createAt
-      body
+      comments {
+        id
+        username
+        createAt
+        body
+      }
+      commentCount
     }
-    commentCount
   }
-}
 `;
 
 export default DeleteButton;

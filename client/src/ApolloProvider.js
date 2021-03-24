@@ -8,8 +8,9 @@ import {
 } from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 
+
 const httpLink = new HttpLink({
-  uri: 'http://localhost:5000',
+  uri: `http://${process.env.REACT_APP_BACKEND_HOST}:${process.env.REACT_APP_BACKEND_PORT}`,
 });
 
 const authLink = setContext(() => {
